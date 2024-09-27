@@ -108,11 +108,20 @@ function submitForm() {
         formDataStr += `${key}: ${value}\n`;
     });
     
-    // You can send this data to a backend or save as a file
-    console.log(formDataStr);
-    alert("Form Submitted! Check console for data.");
-}
-</script>
+    // Create a blob from the data string
+    const blob = new Blob([formDataStr], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    
+    // Create a link to download the file
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `port_audit_${new Date().toISOString().slice(0, 10)}.txt`; // Filename includes the date
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    
+    // Optionally clear the form fields
+    form.reset();
 
-</body>
-</html>
+    alert("Form Submitted! Your data has been downloaded.");
+}
