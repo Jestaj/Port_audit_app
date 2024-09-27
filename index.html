@@ -76,8 +76,18 @@
                                 <option value="Device">Device</option>
                             </select>
 
+                            <label for="patchPanelID${i}">Patch Panel ID:</label>
+                            <input type="text" id="patchPanelID${i}" name="patchPanelID${i}">
+
                             <label for="farEndDevice${i}">Device on the far end:</label>
                             <input type="text" id="farEndDevice${i}" name="farEndDevice${i}">
+
+                            <label for="activePort${i}">Is the port active?</label>
+                            <select id="activePort${i}" name="activePort${i}" required>
+                                <option value="">Select...</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
 
                             <label for="poe${i}">Is PoE enabled?</label>
                             <select id="poe${i}" name="poe${i}" required>
@@ -107,7 +117,8 @@
                 formDataStr += `\nPort ${i}:\n`;
                 entries.forEach(([key, value]) => {
                     if (key.startsWith(`portNumber${i}`) || key.startsWith(`pluggedIn${i}`) ||
-                        key.startsWith(`pluggedWhere${i}`) || key.startsWith(`farEndDevice${i}`) ||
+                        key.startsWith(`pluggedWhere${i}`) || key.startsWith(`patchPanelID${i}`) ||
+                        key.startsWith(`farEndDevice${i}`) || key.startsWith(`activePort${i}`) ||
                         key.startsWith(`poe${i}`)) {
                         formDataStr += `${key.replace(`${i}`, '')}: ${value}\n`;
                     }
