@@ -8,29 +8,28 @@
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
         }
         form {
-            max-width: 600px;
-            margin: auto;
-            background-color: #f4f4f4;
+            background-color: white;
             padding: 20px;
-            border-radius: 8px;
+            border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         label {
             display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
+            margin: 10px 0 5px;
         }
         input, select, textarea {
             width: 100%;
             padding: 8px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
         }
         button {
-            background-color: #28a745;
+            background-color: #4CAF50;
             color: white;
             padding: 10px;
             border: none;
@@ -38,95 +37,96 @@
             cursor: pointer;
         }
         button:hover {
-            background-color: #218838;
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
-
-<h2>Cisco Catalyst 9200L-48P-4G-E Port Audit Form</h2>
-
-<form id="auditForm">
-    <label for="auditorName">Auditor Name</label>
-    <input type="text" id="auditorName" name="auditorName" required>
-
-    <label for="date">Date</label>
-    <input type="date" id="date" name="date" required>
-
-    <label for="portNumber">Port Number</label>
-    <input type="text" id="portNumber" name="portNumber" required>
-
-    <label for="portType">Port Type</label>
-    <select id="portType" name="portType" required>
-        <option value="Data">Data</option>
-        <option value="Uplink">Uplink (1G SFP)</option>
-        <option value="PoE">PoE+ (Power over Ethernet)</option>
-    </select>
-
-    <label for="cableType">Cable Type</label>
-    <select id="cableType" name="cableType" required>
-        <option value="Ethernet">Ethernet (Copper)</option>
-        <option value="Fiber">Fiber</option>
-    </select>
-
-    <label for="portStatus">Port Status</label>
-    <input type="text" id="portStatus" name="portStatus" required>
-
-    <label for="linkLight">Link Light Status</label>
-    <select id="linkLight" name="linkLight" required>
-        <option value="Green">Green (Active)</option>
-        <option value="Amber">Amber (Issue/Warning)</option>
-        <option value="Off">Off (No Connection)</option>
-    </select>
-
-    <label for="poeStatus">PoE Enabled</label>
-    <select id="poeStatus" name="poeStatus">
-        <option value="Yes">Yes</option>
-        <option value="No">No</option>
-    </select>
-
-    <label for="powerOutput">Power Output (W)</label>
-    <input type="number" id="powerOutput" name="powerOutput">
-
-    <label for="issues">Issues Observed</label>
-    <textarea id="issues" name="issues" rows="4"></textarea>
-
-    <label for="action">Action Required</label>
-    <textarea id="action" name="action" rows="4"></textarea>
-
-    <button type="button" onclick="submitForm()">Submit</button>
-</form>
-
-<script>
-function submitForm() {
-    const form = document.getElementById('auditForm');
-    const formData = new FormData(form);
-    const entries = [...formData.entries()];
+    <h2>Port Audit Form</h2>
+    <p>Please fill out the form below for each port audit.</p>
     
-    let formDataStr = 'Port Audit Form\n\n';
-    entries.forEach(([key, value]) => {
-        formDataStr += `${key}: ${value}\n`;
-    });
-    
-    // Create a blob from the data string
-    const blob = new Blob([formDataStr], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    
-    // Create a link to download the file
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `port_audit_${new Date().toISOString().slice(0, 10)}.txt`; // Filename includes the date
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    
-    // Optionally clear the form fields
-    form.reset();
+    <form id="auditForm">
+        <label for="switchName">Switch Name:</label>
+        <input type="text" id="switchName" name="switchName" required>
 
-    alert("Form Submitted! Your data has been downloaded.");
-}
-</script>
+        <!-- Loop for 24 Ports -->
+        <div id="portsContainer">
+            <h3>Ports</h3>
+            <!-- Create 24 port entries -->
+            <script>
+                for (let i = 1; i <= 24; i++) {
+                    document.write(`
+                        <fieldset style="margin-bottom: 15px; padding: 10px; border: 1px solid #ccc;">
+                            <legend>Port ${i}</legend>
 
+                            <label for="portNumber${i}">Port Number:</label>
+                            <input type="text" id="portNumber${i}" name="portNumber${i}" required>
+
+                            <label for="pluggedIn${i}">Is anything plugged into the port?</label>
+                            <select id="pluggedIn${i}" name="pluggedIn${i}" required>
+                                <option value="">Select...</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+
+                            <label for="pluggedWhere${i}">Where is it plugged into?</label>
+                            <select id="pluggedWhere${i}" name="pluggedWhere${i}" required>
+                                <option value="">Select...</option>
+                                <option value="Patch Panel">Patch Panel</option>
+                                <option value="Device">Device</option>
+                            </select>
+
+                            <label for="farEndDevice${i}">Device on the far end:</label>
+                            <input type="text" id="farEndDevice${i}" name="farEndDevice${i}">
+
+                            <label for="poe${i}">Is PoE enabled?</label>
+                            <select id="poe${i}" name="poe${i}" required>
+                                <option value="">Select...</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </fieldset>
+                    `);
+                }
+            </script>
+        </div>
+        
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        document.getElementById('auditForm').onsubmit = function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const form = document.getElementById('auditForm');
+            const formData = new FormData(form);
+            const entries = [...formData.entries()];
+            
+            let formDataStr = `Port Audit Form\nSwitch Name: ${formData.get('switchName')}\n\n`;
+            for (let i = 1; i <= 24; i++) {
+                formDataStr += `\nPort ${i}:\n`;
+                entries.forEach(([key, value]) => {
+                    if (key.startsWith(`portNumber${i}`) || key.startsWith(`pluggedIn${i}`) ||
+                        key.startsWith(`pluggedWhere${i}`) || key.startsWith(`farEndDevice${i}`) ||
+                        key.startsWith(`poe${i}`)) {
+                        formDataStr += `${key.replace(`${i}`, '')}: ${value}\n`;
+                    }
+                });
+            }
+            
+            const blob = new Blob([formDataStr], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `port_audit_${new Date().toISOString().slice(0, 10)}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            
+            form.reset();
+            alert("Form Submitted! Your data has been downloaded.");
+        };
+    </script>
 </body>
 </html>
-    
