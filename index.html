@@ -47,7 +47,7 @@
     
     <form id="auditForm">
         <label for="switchName">Switch Name:</label>
-        <input type="text" id="switchName" name="switchName" required>
+        <input type="text" id="switchName" name="switchName">
 
         <!-- Loop for 24 Ports -->
         <div id="portsContainer">
@@ -60,17 +60,17 @@
                             <legend>Port ${i}</legend>
 
                             <label for="portNumber${i}">Port Number:</label>
-                            <input type="text" id="portNumber${i}" name="portNumber${i}" required>
+                            <input type="text" id="portNumber${i}" name="portNumber${i}">
 
                             <label for="pluggedIn${i}">Is anything plugged into the port?</label>
-                            <select id="pluggedIn${i}" name="pluggedIn${i}" required>
+                            <select id="pluggedIn${i}" name="pluggedIn${i}">
                                 <option value="">Select...</option>
                                 <option value="Yes">Yes</option>
                                 <option value="No">No</option>
                             </select>
 
                             <label for="pluggedWhere${i}">Where is it plugged into?</label>
-                            <select id="pluggedWhere${i}" name="pluggedWhere${i}" required>
+                            <select id="pluggedWhere${i}" name="pluggedWhere${i}">
                                 <option value="">Select...</option>
                                 <option value="Patch Panel">Patch Panel</option>
                                 <option value="Device">Device</option>
@@ -83,14 +83,14 @@
                             <input type="text" id="farEndDevice${i}" name="farEndDevice${i}">
 
                             <label for="activePort${i}">Is the port active?</label>
-                            <select id="activePort${i}" name="activePort${i}" required>
+                            <select id="activePort${i}" name="activePort${i}">
                                 <option value="">Select...</option>
                                 <option value="Yes">Yes</option>
                                 <option value="No">No</option>
                             </select>
 
                             <label for="poe${i}">Is PoE enabled?</label>
-                            <select id="poe${i}" name="poe${i}" required>
+                            <select id="poe${i}" name="poe${i}">
                                 <option value="">Select...</option>
                                 <option value="Yes">Yes</option>
                                 <option value="No">No</option>
