@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Port Audit Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            max-width: 600px;
+            margin: auto;
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Cisco Catalyst 9200L-48P-4G-E Port Audit Form</h2>
+
+<form id="auditForm">
+    <label for="auditorName">Auditor Name</label>
+    <input type="text" id="auditorName" name="auditorName" required>
+
+    <label for="date">Date</label>
+    <input type="date" id="date" name="date" required>
+
+    <label for="portNumber">Port Number</label>
+    <input type="text" id="portNumber" name="portNumber" required>
+
+    <label for="portType">Port Type</label>
+    <select id="portType" name="portType" required>
+        <option value="Data">Data</option>
+        <option value="Uplink">Uplink (1G SFP)</option>
+        <option value="PoE">PoE+ (Power over Ethernet)</option>
+    </select>
+
+    <label for="cableType">Cable Type</label>
+    <select id="cableType" name="cableType" required>
+        <option value="Ethernet">Ethernet (Copper)</option>
+        <option value="Fiber">Fiber</option>
+    </select>
+
+    <label for="portStatus">Port Status</label>
+    <input type="text" id="portStatus" name="portStatus" required>
+
+    <label for="linkLight">Link Light Status</label>
+    <select id="linkLight" name="linkLight" required>
+        <option value="Green">Green (Active)</option>
+        <option value="Amber">Amber (Issue/Warning)</option>
+        <option value="Off">Off (No Connection)</option>
+    </select>
+
+    <label for="poeStatus">PoE Enabled</label>
+    <select id="poeStatus" name="poeStatus">
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+    </select>
+
+    <label for="powerOutput">Power Output (W)</label>
+    <input type="number" id="powerOutput" name="powerOutput">
+
+    <label for="issues">Issues Observed</label>
+    <textarea id="issues" name="issues" rows="4"></textarea>
+
+    <label for="action">Action Required</label>
+    <textarea id="action" name="action" rows="4"></textarea>
+
+    <button type="button" onclick="submitForm()">Submit</button>
+</form>
+
+<script>
+function submitForm() {
+    const form = document.getElementById('auditForm');
+    const formData = new FormData(form);
+    const entries = [...formData.entries()];
+    
+    let formDataStr = 'Port Audit Form\n\n';
+    entries.forEach(([key, value]) => {
+        formDataStr += `${key}: ${value}\n`;
+    });
+    
+    // You can send this data to a backend or save as a file
+    console.log(formDataStr);
+    alert("Form Submitted! Check console for data.");
+}
+</script>
+
+</body>
+</html>
