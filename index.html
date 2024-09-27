@@ -105,55 +105,52 @@
     </form>
 
     <script>
-        <script>
-    document.getElementById('auditForm').onsubmit = function(event) {
-        event.preventDefault(); // Prevent default form submission
+        document.getElementById('auditForm').onsubmit = function(event) {
+            event.preventDefault(); // Prevent default form submission
 
-        const form = document.getElementById('auditForm');
-        const formData = new FormData(form);
-        const entries = [...formData.entries()];
-        
-        let formDataStr = `Port Audit Form\nSwitch Name: ${formData.get('switchName')}\n\n`;
-        
-        // Create a map to store unique port data
-        const portDataMap = {};
+            const form = document.getElementById('auditForm');
+            const formData = new FormData(form);
+            const entries = [...formData.entries()];
+            
+            let formDataStr = `Port Audit Form\nSwitch Name: ${formData.get('switchName')}\n\n`;
+            
+            // Create a map to store unique port data
+            const portDataMap = {};
 
-        for (let i = 1; i <= 24; i++) {
-            portDataMap[i] = {};
-            entries.forEach(([key, value]) => {
-                if (key.startsWith(`portNumber${i}`) || key.startsWith(`pluggedIn${i}`) ||
-                    key.startsWith(`pluggedWhere${i}`) || key.startsWith(`patchPanelID${i}`) ||
-                    key.startsWith(`farEndDevice${i}`) || key.startsWith(`activePort${i}`) ||
-                    key.startsWith(`poe${i}`)) {
-                    const cleanedKey = key.replace(`${i}`, '');
-                    portDataMap[i][cleanedKey] = value; // Store in map to avoid duplicates
-                }
-            });
-        }
-        
-        // Generate output from the map
-        for (let i = 1; i <= 24; i++) {
-            formDataStr += `\nPort ${i}:\n`;
-            for (const [key, value] of Object.entries(portDataMap[i])) {
-                formDataStr += `${key}: ${value}\n`;
+            for (let i = 1; i <= 24; i++) {
+                portDataMap[i] = {};
+                entries.forEach(([key, value]) => {
+                    if (key.startsWith(`portNumber${i}`) || key.startsWith(`pluggedIn${i}`) ||
+                        key.startsWith(`pluggedWhere${i}`) || key.startsWith(`patchPanelID${i}`) ||
+                        key.startsWith(`farEndDevice${i}`) || key.startsWith(`activePort${i}`) ||
+                        key.startsWith(`poe${i}`)) {
+                        const cleanedKey = key.replace(`${i}`, '');
+                        portDataMap[i][cleanedKey] = value; // Store in map to avoid duplicates
+                    }
+                });
             }
-        }
-        
-        const blob = new Blob([formDataStr], { type: 'text/plain' });
-        const url = URL.createObjectURL(blob);
-        
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `port_audit_${new Date().toISOString().slice(0, 10)}.txt`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        
-        form.reset();
-        alert("Form Submitted! Your data has been downloaded.");
-    };
-</script>
-        
+            
+            // Generate output from the map
+            for (let i = 1; i <= 24; i++) {
+                formDataStr += `\nPort ${i}:\n`;
+                for (const [key, value] of Object.entries(portDataMap[i])) {
+                    formDataStr += `${key}: ${value}\n`;
+                }
+            }
+            
+            const blob = new Blob([formDataStr], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `port_audit_${new Date().toISOString().slice(0, 10)}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            
+            form.reset();
+            alert("Form Submitted! Your data has been downloaded.");
+        };
     </script>
 </body>
 </html>
