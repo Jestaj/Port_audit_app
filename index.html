@@ -20,10 +20,8 @@
 
         <!-- Port information (24 ports) -->
         <div id="portsContainer">
-            <!-- Generate fields for 24 ports -->
-            <!-- Template for each port -->
-            <!-- Add this section dynamically for all 24 ports -->
             <script>
+                // Loop to generate fields for 24 ports
                 for (let i = 1; i <= 24; i++) {
                     document.write(`
                     <div class="port">
@@ -100,12 +98,18 @@
 
             // Create a blob with the form data
             const blob = new Blob([formDataStr], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
+
+            // Dynamically create the file name based on Site Name, Closet ID, and current date
+            const siteName = formData.get('siteName').replace(/\s+/g, '_');  // Replace spaces with underscores
+            const closetId = formData.get('closetId').replace(/\s+/g, '_');  // Replace spaces with underscores
+            const currentDate = new Date().toISOString().slice(0, 10);  // Get current date in YYYY-MM-DD format
+            const fileName = `port_audit_${siteName}_${closetId}_${currentDate}.txt`;
 
             // Create a download link and trigger the download
+            const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `port_audit_${new Date().toISOString().slice(0, 10)}.txt`;
+            a.download = fileName;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
