@@ -8,54 +8,94 @@
 <body>
     <h1>Port Audit Form</h1>
     <form id="portAuditForm">
-        <!-- New fields added: Site Name and Closet ID -->
+        <!-- Site information -->
         <label for="siteName">Site Name:</label>
         <input type="text" id="siteName" name="siteName"><br><br>
 
         <label for="closetId">Closet ID:</label>
         <input type="text" id="closetId" name="closetId"><br><br>
 
-        <!-- Existing field: Switch Name -->
         <label for="switchName">Switch Name:</label>
         <input type="text" id="switchName" name="switchName"><br><br>
 
-        <!-- Other port audit fields -->
-        <div class="port">
-            <label for="portNumber">Port Number:</label>
-            <input type="number" id="portNumber" name="portNumber"><br><br>
+        <!-- Port information (multiple ports) -->
+        <div id="portsContainer">
+            <!-- Port 1 -->
+            <div class="port">
+                <h3>Port 1</h3>
+                <label for="portNumber1">Port Number:</label>
+                <input type="number" id="portNumber1" name="portNumber1" value="1" readonly><br><br>
 
-            <label for="isPluggedIn">Is anything plugged into the port?</label>
-            <input type="radio" id="pluggedInYes" name="isPluggedIn" value="Yes">
-            <label for="pluggedInYes">Yes</label>
-            <input type="radio" id="pluggedInNo" name="isPluggedIn" value="No">
-            <label for="pluggedInNo">No</label><br><br>
+                <label for="isPluggedIn1">Is anything plugged into the port?</label>
+                <input type="radio" id="pluggedInYes1" name="isPluggedIn1" value="Yes">
+                <label for="pluggedInYes1">Yes</label>
+                <input type="radio" id="pluggedInNo1" name="isPluggedIn1" value="No">
+                <label for="pluggedInNo1">No</label><br><br>
 
-            <label for="wherePlugged">Where is it plugged into?</label>
-            <select id="wherePlugged" name="wherePlugged">
-                <option value="Patch Panel">Patch Panel</option>
-                <option value="Device">Device</option>
-            </select><br><br>
+                <label for="wherePlugged1">Where is it plugged into?</label>
+                <select id="wherePlugged1" name="wherePlugged1">
+                    <option value="Patch Panel">Patch Panel</option>
+                    <option value="Device">Device</option>
+                </select><br><br>
 
-            <label for="deviceOnFarEnd">Device on the far end:</label>
-            <input type="text" id="deviceOnFarEnd" name="deviceOnFarEnd"><br><br>
+                <label for="deviceOnFarEnd1">Device on the far end:</label>
+                <input type="text" id="deviceOnFarEnd1" name="deviceOnFarEnd1"><br><br>
 
-            <label for="portActive">Is the port active?</label>
-            <input type="radio" id="portActiveYes" name="portActive" value="Yes">
-            <label for="portActiveYes">Yes</label>
-            <input type="radio" id="portActiveNo" name="portActive" value="No">
-            <label for="portActiveNo">No</label><br><br>
+                <label for="portActive1">Is the port active?</label>
+                <input type="radio" id="portActiveYes1" name="portActive1" value="Yes">
+                <label for="portActiveYes1">Yes</label>
+                <input type="radio" id="portActiveNo1" name="portActive1" value="No">
+                <label for="portActiveNo1">No</label><br><br>
 
-            <label for="patchPanelId">Patch Panel ID:</label>
-            <input type="text" id="patchPanelId" name="patchPanelId"><br><br>
+                <label for="patchPanelId1">Patch Panel ID:</label>
+                <input type="text" id="patchPanelId1" name="patchPanelId1"><br><br>
 
-            <label for="poeEnabled">PoE Enabled:</label>
-            <input type="radio" id="poeEnabledYes" name="poeEnabled" value="Yes">
-            <label for="poeEnabledYes">Yes</label>
-            <input type="radio" id="poeEnabledNo" name="poeEnabled" value="No">
-            <label for="poeEnabledNo">No</label><br><br>
+                <label for="poeEnabled1">PoE Enabled:</label>
+                <input type="radio" id="poeEnabledYes1" name="poeEnabled1" value="Yes">
+                <label for="poeEnabledYes1">Yes</label>
+                <input type="radio" id="poeEnabledNo1" name="poeEnabled1" value="No">
+                <label for="poeEnabledNo1">No</label><br><br>
+            </div>
+
+            <!-- Port 2 -->
+            <div class="port">
+                <h3>Port 2</h3>
+                <label for="portNumber2">Port Number:</label>
+                <input type="number" id="portNumber2" name="portNumber2" value="2" readonly><br><br>
+
+                <label for="isPluggedIn2">Is anything plugged into the port?</label>
+                <input type="radio" id="pluggedInYes2" name="isPluggedIn2" value="Yes">
+                <label for="pluggedInYes2">Yes</label>
+                <input type="radio" id="pluggedInNo2" name="isPluggedIn2" value="No">
+                <label for="pluggedInNo2">No</label><br><br>
+
+                <label for="wherePlugged2">Where is it plugged into?</label>
+                <select id="wherePlugged2" name="wherePlugged2">
+                    <option value="Patch Panel">Patch Panel</option>
+                    <option value="Device">Device</option>
+                </select><br><br>
+
+                <label for="deviceOnFarEnd2">Device on the far end:</label>
+                <input type="text" id="deviceOnFarEnd2" name="deviceOnFarEnd2"><br><br>
+
+                <label for="portActive2">Is the port active?</label>
+                <input type="radio" id="portActiveYes2" name="portActive2" value="Yes">
+                <label for="portActiveYes2">Yes</label>
+                <input type="radio" id="portActiveNo2" name="portActive2" value="No">
+                <label for="portActiveNo2">No</label><br><br>
+
+                <label for="patchPanelId2">Patch Panel ID:</label>
+                <input type="text" id="patchPanelId2" name="patchPanelId2"><br><br>
+
+                <label for="poeEnabled2">PoE Enabled:</label>
+                <input type="radio" id="poeEnabledYes2" name="poeEnabled2" value="Yes">
+                <label for="poeEnabledYes2">Yes</label>
+                <input type="radio" id="poeEnabledNo2" name="poeEnabled2" value="No">
+                <label for="poeEnabledNo2">No</label><br><br>
+            </div>
+
+            <!-- You can add more ports in the same pattern -->
         </div>
-
-        <!-- Add more port sections if necessary -->
 
         <button type="submit">Submit</button>
     </form>
@@ -64,7 +104,7 @@
         const form = document.getElementById('portAuditForm');
 
         form.addEventListener('submit', function (event) {
-            event.preventDefault();  // Prevent form from submitting traditionally
+            event.preventDefault();  // Prevent default form submission
             handleFormSubmission();
         });
 
@@ -72,13 +112,22 @@
             let formDataStr = "";
             const formData = new FormData(form);
 
-            // Gather all form data into a string
-            for (let [key, value] of formData.entries()) {
-                formDataStr += `${key}: ${value}\n`;
-            }
+            // Gather header data: Site Name, Closet ID, Switch Name
+            formDataStr += `Site Name: ${formData.get('siteName')}\n`;
+            formDataStr += `Closet ID: ${formData.get('closetId')}\n`;
+            formDataStr += `Switch Name: ${formData.get('switchName')}\n\n`;
 
-            // Log the form data string (for debugging purposes)
-            console.log(formDataStr);
+            // Gather data for each port (Port 1 and Port 2 as examples)
+            for (let i = 1; i <= 2; i++) {
+                formDataStr += `Port ${i}\n`;
+                formDataStr += `Port Number: ${formData.get('portNumber' + i)}\n`;
+                formDataStr += `Is Plugged In: ${formData.get('isPluggedIn' + i)}\n`;
+                formDataStr += `Where Plugged: ${formData.get('wherePlugged' + i)}\n`;
+                formDataStr += `Device on Far End: ${formData.get('deviceOnFarEnd' + i)}\n`;
+                formDataStr += `Port Active: ${formData.get('portActive' + i)}\n`;
+                formDataStr += `Patch Panel ID: ${formData.get('patchPanelId' + i)}\n`;
+                formDataStr += `PoE Enabled: ${formData.get('poeEnabled' + i)}\n\n`;
+            }
 
             // Create a blob with the form data
             const blob = new Blob([formDataStr], { type: 'text/plain' });
