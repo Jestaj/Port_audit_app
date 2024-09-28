@@ -117,7 +117,9 @@
             const form = document.getElementById('auditForm');
             const formData = new FormData(form);
             const entries = [...formData.entries()];
-            
+
+            let formDataStr = `Port Audit Form\nsite: ${formData.get('site')}\n\n`;
+            let formDataStr = `Port Audit Form\nCloset ID: ${formData.get('closetid')}\n\n`;
             let formDataStr = `Port Audit Form\nSwitch Name: ${formData.get('switchName')}\n\n`;
             
             // Create a map to store unique port data
