@@ -138,9 +138,6 @@
                 }
             }
 
-            console.log("Collected Data for Port 1: ", portDataMap[1]);
-            console.log("Collected Data for Port 2: ", portDataMap[2]);
-
             const blob = new Blob([formDataStr], { type: 'text/plain' });
             const url = URL.createObjectURL(blob);
             
