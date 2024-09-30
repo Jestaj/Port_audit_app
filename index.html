@@ -76,34 +76,39 @@
         });
 
         function handleFormSubmission() {
-            let formDataStr = "";
+            let csvContent = "";
             const formData = new FormData(form);
 
+            // CSV headers
+            csvContent += `Site Name,Closet ID,Switch Name,Port Number,Is Plugged In,Where Plugged,Device on Far End,Port Active,Patch Panel ID,PoE Enabled\n`;
+
             // Gather header data: Site Name, Closet ID, Switch Name
-            formDataStr += `Site Name: ${formData.get('siteName')}\n`;
-            formDataStr += `Closet ID: ${formData.get('closetId')}\n`;
-            formDataStr += `Switch Name: ${formData.get('switchName')}\n\n`;
+            const siteName = formData.get('siteName') || '';
+            const closetId = formData.get('closetId') || '';
+            const switchName = formData.get('switchName') || '';
 
             // Gather data for each port (Port 1 to Port 24)
             for (let i = 1; i <= 24; i++) {
-                formDataStr += `Port ${i}\n`;
-                formDataStr += `Port Number: ${formData.get('portNumber' + i)}\n`;
-                formDataStr += `Is Plugged In: ${formData.get('isPluggedIn' + i)}\n`;
-                formDataStr += `Where Plugged: ${formData.get('wherePlugged' + i)}\n`;
-                formDataStr += `Device on Far End: ${formData.get('deviceOnFarEnd' + i)}\n`;
-                formDataStr += `Port Active: ${formData.get('portActive' + i)}\n`;
-                formDataStr += `Patch Panel ID: ${formData.get('patchPanelId' + i)}\n`;
-                formDataStr += `PoE Enabled: ${formData.get('poeEnabled' + i)}\n\n`;
+                const portNumber = formData.get('portNumber' + i) || '';
+                const isPluggedIn = formData.get('isPluggedIn' + i) || '';
+                const wherePlugged = formData.get('wherePlugged' + i) || '';
+                const deviceOnFarEnd = formData.get('deviceOnFarEnd' + i) || '';
+                const portActive = formData.get('portActive' + i) || '';
+                const patchPanelId = formData.get('patchPanelId' + i) || '';
+                const poeEnabled = formData.get('poeEnabled' + i) || '';
+
+                // Append row to CSV content
+                csvContent += `${siteName},${closetId},${switchName},${portNumber},${isPluggedIn},${wherePlugged},${deviceOnFarEnd},${portActive},${patchPanelId},${poeEnabled}\n`;
             }
 
-            // Create a blob with the form data
-            const blob = new Blob([formDataStr], { type: 'text/plain' });
+            // Create a blob with the CSV data
+            const blob = new Blob([csvContent], { type: 'text/csv' });
 
             // Dynamically create the file name based on Site Name, Closet ID, and current date
-            const siteName = formData.get('siteName').replace(/\s+/g, '_');  // Replace spaces with underscores
-            const closetId = formData.get('closetId').replace(/\s+/g, '_');  // Replace spaces with underscores
+            const csvSiteName = siteName.replace(/\s+/g, '_');  // Replace spaces with underscores
+            const csvClosetId = closetId.replace(/\s+/g, '_');  // Replace spaces with underscores
             const currentDate = new Date().toISOString().slice(0, 10);  // Get current date in YYYY-MM-DD format
-            const fileName = `port_audit_${siteName}_${closetId}_${currentDate}.txt`;
+            const fileName = `port_audit_${csvSiteName}_${csvClosetId}_${currentDate}.csv`;
 
             // Create a download link and trigger the download
             const url = URL.createObjectURL(blob);
@@ -118,7 +123,7 @@
             form.reset();
 
             // Show an alert to the user
-            alert("Form Submitted! Your data has been downloaded.");
+            alert("Form Submitted! Your data has been downloaded as a CSV.");
         }
     </script>
 </body>
