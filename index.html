@@ -97,7 +97,7 @@
             }
 
             // Create a blob with the form data
-            const blob = new Blob([formDataStr], { type: 'text/plain' });
+            const blob = new Blob([formDataStr], { type: 'csv' });
 
             // Dynamically create the file name based on Site Name, Closet ID, and current date
             const siteName = formData.get('siteName').replace(/\s+/g, '_');  // Replace spaces with underscores
